@@ -13,7 +13,7 @@ pipeline {
         DEV_PROJECT = "andrebos2-books-dev"
         STAGE_PROJECT = "andrebos2-books-stage"
         APP_GIT_URL = "https://github.com/andrewbos/DO288-apps"
-        NEXUS_SERVER = "http://nexus-common.apps.cluster.domain.example.com/repository/nodejs"
+        NEXUS_SERVER = "http://nexus-common.apps.eu45.prod.nextcle.com/repository/nodejs"
         APP_NAME = "books"
     }
 
