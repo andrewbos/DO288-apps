@@ -5,7 +5,7 @@ pipeline {
     }
     agent {
       node {
-        label 'nodejs'enkins agent
+        label 'nodejs'
       }
     }
 
@@ -125,7 +125,6 @@ pipeline {
                         oc expose svc/${APP_NAME}
                    '''
             }
-        }
 
         stage('Wait for deployment in Staging') {
             steps {
@@ -134,16 +133,13 @@ pipeline {
                 script {
                     routeHost = readFile('routehost').trim()
 
+                    openshift.withCluster() {
                        openshift.withProject( "${STAGE_PROJECT}" ) {
                          def deployment = openshift.selector("dc", "${APP_NAME}").rollout()
                          openshift.selector("dc", "${APP_NAME}").related('pods').untilEach(1) {
                            return (it.object().status.phase == "Running")
                        }
                     }
-
-                    openshift.withCluster() {
-                        //TODO: Watch deployment until pod is in 'Running' state
-
                         echo "Deployment to Staging env is complete. Access the app at the URL http://${routeHost}."
                     }
                 }
