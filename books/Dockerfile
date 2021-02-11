@@ -1,4 +1,4 @@
-FROM node:14
+FROM registry.redhat.io/ubi8/ubi
 
 RUN yum --disableplugin=subscription-manager -y install npm && yum --disableplugin=subscription-manager clean all
 RUN mkdir /usr/src/app
