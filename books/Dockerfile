@@ -1,4 +1,6 @@
-FROM nodejs-12:latest
+FROM registry.redhat.io/ubi8/ubi
+
+RUN yum --disableplugin=subscription-manager -y install npm && yum --disableplugin=subscription-manager -y install nodejs && yum --disableplugin=subscription-manager clean all
 
 # Create app directory
 WORKDIR /usr/src/app
@@ -8,6 +10,7 @@ WORKDIR /usr/src/app
 # where available (npm@5+)
 COPY package*.json ./
 
+RUN npm cache clear
 RUN npm install
 # If you are building your code for production
 # RUN npm ci --only=production
