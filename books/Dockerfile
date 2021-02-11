@@ -1,13 +1,19 @@
-FROM registry.redhat.io/ubi8/ubi
-MAINTAINER Andre Bos a.bos@dji.minjus.nl
-# DocumentRoot for Apache
-ENV DOCROOT=/var/www/html
-RUN yum --disableplugin=subscription-manager -y install httpd && yum --disableplugin=subscription-manager -y install npm && yum --disableplugin=subscription-manager clean all
-RUN sed -i 's/Listen 80/Listen 8080/' /etc/httpd/conf/httpd.conf && chgrp -R 0 /var/log/httpd /var/run/httpd && chmod -R g=u /var/log/httpd /var/run/httpd
-RUN mkdir /usr/src/app
+FROM nodejs:12-ubi8
+
+# Create app directory
 WORKDIR /usr/src/app
+
+# Install app dependencies
+# A wildcard is used to ensure both package.json AND package-lock.json are copied
+# where available (npm@5+)
 COPY package*.json ./
-RUN npm build
+
+RUN npm install
+# If you are building your code for production
+# RUN npm ci --only=production
+
+# Bundle app source
 COPY . .
+
 EXPOSE 8080
 CMD [ "node", "server.js" ]
