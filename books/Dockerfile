@@ -1,5 +1,7 @@
 FROM node:14
 
+RUN mkdir /usr/src/app
+
 # Create app directory
 WORKDIR /usr/src/app
 
