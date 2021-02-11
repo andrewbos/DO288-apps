@@ -1,5 +1,5 @@
 FROM node:14
-RUN yum --disableplugin=subscription-manager -y install npm && yum --disableplugin=subscription-manager clean all
+
 # Create app directory
 WORKDIR /usr/src/app
 
