@@ -1,4 +1,4 @@
-FROM ubi8/nodejs-12
+FROM nodejs-12:latest
 
 # Create app directory
 WORKDIR /usr/src/app
