@@ -1,6 +1,4 @@
-FROM registry.redhat.io/ubi8/ubi
-
-RUN yum --disableplugin=subscription-manager -y install npm && yum --disableplugin=subscription-manager -y install nodejs && yum --disableplugin=subscription-manager clean all
+FROM node:12
 
 # Create app directory
 WORKDIR /usr/src/app
